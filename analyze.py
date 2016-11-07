@@ -1,9 +1,11 @@
-import re
+import re, json
 
 # List of text files to be analyzed
 filenames = ['debate1.txt', 'debate2.txt', 'debate3.txt']
 
 speech_segments = {'clinton': [], 'trump': []}
+
+num_black_mentions = 0
 
 for filename in filenames:
   f = open(filename, 'r')
@@ -14,17 +16,20 @@ for filename in filenames:
   # iteratively read each line in the transcript
   for line in f:
     speaker = re.match( r'[A-Z]+\:', line)
+    mentions_black = re.search( r'((A|a)frican( *)(-*)( *)(A|a)merican)|((B|b)lack)', line)
+    mentions_latino = re.search( r'((L|l)atin(o|a))|((H|h)ispanic)', line)
     if speaker:
-      if current_speaker in speech_segments:
-        speech_segments[current_speaker].append(current_segment)
-      elif current_speaker != '':
-        speech_segments[current_speaker] = [current_segment]
       current_speaker = speaker.group(0)[:-1].lower()
       current_segment = line.split(': ', 1)[1].strip()
     else:
-      current_segment += line.strip()
-
+      current_segment = line
+    if (mentions_black or mentions_latino) and current_speaker in speech_segments:
+      speech_segments[current_speaker].append(current_segment)
+    elif mentions_black or mentions_latino:
+      speech_segments[current_speaker] = [current_segment]
   f.close()
 
 for speaker in speech_segments:
-  print "Parsed {0} lines for speaker {1}".format(len(speech_segments[speaker]), speaker)
+  print "Parsed {0} lines for speaker '{1}'".format(len(speech_segments[speaker]), speaker)
+  for segment in speech_segments[speaker]:
+    print segment
