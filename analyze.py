@@ -1,4 +1,4 @@
-import re, json, nltk
+import re, nltk
 from nltk.corpus import treebank
 
 # List of text files to be analyzed
@@ -7,8 +7,6 @@ filenames = ['debate1.txt', 'debate2.txt', 'debate3.txt']
 speech_segments = {'clinton': [], 'trump': []}
 
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-
-num_black_mentions = 0
 
 for filename in filenames:
   f = open(filename, 'r')
