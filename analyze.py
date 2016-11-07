@@ -6,7 +6,7 @@ filenames = ['debate1.txt', 'debate2.txt', 'debate3.txt']
 speech_segments = {'clinton': [], 'trump': []}
 
 def mean(numbers):
-  return float(sum(numbers)) / max(len(numbers), 1)
+  return float(sum(numbers)) / len(numbers)
 
 def variance(numbers):
   mu = mean(numbers)
@@ -46,7 +46,7 @@ for speaker in speech_segments:
   for segment in speech_segments[speaker]:
     tokens = nltk.word_tokenize(segment)
     segment_lengths.append(len(tokens))
-  print "Speaker {0} averaged at {1} words per segment, with a min of {2}, a max of {3}, and a standard deviation of {4}".format(
+  print "Speaker {0} averaged at {1} words per segment, with a min of {2}, a max of {3}, and a standard deviation of {4}\n".format(
     speaker, mean(segment_lengths), min(segment_lengths), max(segment_lengths), std_dev(segment_lengths))
 
 
