@@ -22,5 +22,5 @@ A NLTK Downloader GUI will open. From here, select "All packages" and click the 
 
 ## Notes
 
-- Data for Middle-Eastern Americans, Asian Americans, and Native Americans was not included because these groups were not mentioned by either candidate.
+- Data for Middle-Eastern Americans, Asian Americans, and Native Americans was not included because these groups were not mentioned by either candidate. Additional research may explore other minority groups over a wider range of data.
 - Data for 'Mexicans' was not included in the search for Latinos/Hispanics, because whether this referred to Mexican-Americans or Mexican citizens was ambiguous.
